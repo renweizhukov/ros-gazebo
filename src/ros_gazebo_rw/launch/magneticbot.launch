@@ -1,0 +1,24 @@
+<!-- 
+  This launch file simulates a magneticbot in the Gazebo empty world. It also starts 
+  a keyboard controller in a separate terminal to move the magneticbot via cmd_vel.
+-->
+
+<launch>
+  <!-- Load the magnetic URDF model into the parameter server. -->
+  <param name="robot_description" textfile="$(find ros_gazebo_rw)/urdf/magneticbot.urdf" />
+  <!-- Start Gazebo with an empty world. -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <!-- Spawn a magneticbot in Gazebo, taking descrption from the parameter server. -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+    args="-param robot_description -urdf -model magneticbot" />
+    
+  <!-- Start a robot state publisher to publish the robot state to tf. --> 
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  
+  <!-- Start a generic keyboard teleop for the magneticbot. -->
+  <node name="magnetic_teleop_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+    output="screen" launch-prefix="xterm -e" />
+  
+  <!-- Visualize the magneticbot in rviz. -->  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ros_gazebo_rw)/config/view_magneticbot.rviz" />
+</launch>

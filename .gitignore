@@ -1,4 +1,6 @@
-build/
+build_isolated/
+devel_isolated/
+install_isolated/
 bin/
 lib/
 msg_gen/
