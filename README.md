@@ -66,3 +66,36 @@ See worlds/HouseOneLevel.
 
 See worlds/HouseTwoLevels.
 
+## 7. Plugins
+
+### 7.1 An example world plugin.
+
+http://gazebosim.org/tutorials?tut=plugins_hello_world&cat=write_plugin
+
+To run the world plugin,
+
+```bash
+$ source install_isolated/setup.bash
+$ gzserver `rospack find ros_gazebo_rw_plugins`/world/hello.world --verbose
+```
+
+### 7.2 An example model plugin.
+
+http://gazebosim.org/tutorials?tut=plugins_model&cat=write_plugin
+
+To run the model plugin,
+
+```bash
+$ source install_isolated/setup.bash
+$ gzserver -u `rospack find ros_gazebo_rw_plugins`/world/model_push.world
+```
+
+The option "-u" starts the gazebo server in a paused state.
+
+In a separate terminal, start the gui
+
+```bash
+$ gzclient
+``` 
+
+Click on the play button in the gui to unpause the simulation, and you should see the box move.
